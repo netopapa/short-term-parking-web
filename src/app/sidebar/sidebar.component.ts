@@ -26,7 +26,25 @@ export const ROUTES: RouteInfo[] = [
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',
-        icontype: 'dashboard'
+        icontype: 'assessment'
+    },
+    {
+        path: '/control/inside',
+        title: 'Carros Estacionados',
+        type: 'link',
+        icontype: 'timer'
+    },
+    {
+        path: '/control/registros',
+        title: 'Registros Anteriores',
+        type: 'link',
+        icontype: 'assignment'
+    },
+    {
+        path: '/control/carros',
+        title: 'Lista de Carros',
+        type: 'link',
+        icontype: 'directions_car'
     },
     // {
     //     path: '/persons',

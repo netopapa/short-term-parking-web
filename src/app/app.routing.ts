@@ -10,6 +10,10 @@ export const AppRoutes: Routes = [
                 path: 'dashboard',
                 loadChildren: './views/dashboard/dashboard.module#DashboardModule',
             },
+            {
+                path: 'control',
+                loadChildren: './views/control-panel/control-panel.module#ControlPanelModule',
+            },
         ]
     }
 ];
