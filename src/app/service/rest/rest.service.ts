@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response, URLSearchParams } from '@angular/http';
-import { ERROR_CODE } from 'app/constant/error-codes';
 import { ErrorService } from 'app/service/toast-notification-service/error-service/error.service';
 import { Util } from 'app/util/util';
 import 'rxjs/add/observable/of';
@@ -13,7 +12,6 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
-import { TranslationService } from '../translation/translation.service';
 
 @Injectable()
 export class RestService {
@@ -21,7 +19,6 @@ export class RestService {
 
   constructor(
     public http: Http,
-    private translate: TranslationService,
     public errorHandler?: ErrorService,
   ) {
   }
@@ -143,50 +140,33 @@ export class RestService {
     }
   }
 
-  getErrorJwt(msg: any): boolean {
-    const objString = msg.split('/');
-    const obj = JSON.parse(objString);
-    let mesg: String = obj.message;
-    mesg = mesg.substring(0, 11);
-    if (mesg === 'JWT expired') {
-      return true;
-    }
-    return false;
-  }
-
   public handleError(error: Response | any) {
+    console.log(error);
     let errMsg: string;
-    const errorCustoms = JSON.parse(error._body);
-
-    this.errorHandler.showErrorConvert(errorCustoms);
 
     if (error.status === 401) {
-      error._body = this.translate.translate('Não autorizado');
-      // this.security.logOut();
+      error._body = 'Não autorizado';
     }
 
     if (error instanceof Response && this.checkJson(error)) {
       const body = error.json() || '';
+
       if (body instanceof Array && body.length > 0) {
         errMsg = body[0];
       } else {
         errMsg = body._body;
       }
-    } else if (error._body) {
-      errMsg = this.setLoginFeedBack(error._body);
     } else {
-      errMsg = error._body;
+      errMsg = error._body ? error._body : error.toString();
     }
 
     if (errMsg === undefined) {
-      errMsg = this.translate.translate('Erro com a conexão');
+      errMsg = 'Erro com a conexão';
     }
 
-    // if (this.errorHandler) {
-    //   const errorCustom = JSON.parse(error._body);
-    //   const teste = this.translate.translate(ERROR_CODE.get(errorCustom.code));
-    //   this.errorHandler.throwError(new Error(this.translate.translate(ERROR_CODE.get(errorCustom.code))));
-    // }
+    if (this.errorHandler) {
+      this.errorHandler.throwError(new Error(errMsg));
+    }
     return Observable.throw(errMsg);
   }
 
@@ -202,17 +182,5 @@ export class RestService {
   insertParam(baseUrl, key, value) {
     return Util.insertRequestParam(baseUrl, key, value);
   }
-
-  setLoginFeedBack(msg: string) {
-    switch (msg) {
-      case 'user.password.mismatch':
-        return this.translate.translate('Nome de Usuário ou senha inválidos.');
-      case 'user.disabled':
-        return this.translate.translate('Este usuário está desativado.');
-      case 'username.not.found':
-        return this.translate.translate('Usuário não encontrado.');
-      default:
-        return this.translate.translate(msg);
-    }
-  }
 }
+

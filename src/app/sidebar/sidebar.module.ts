@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar.component';
-import { TranslationPipeModule } from 'app/shared/translation/translation-pipe.module';
 
 @NgModule({
-    imports: [RouterModule, CommonModule, TranslationPipeModule],
+    imports: [RouterModule, CommonModule],
     declarations: [SidebarComponent],
     exports: [SidebarComponent]
 })

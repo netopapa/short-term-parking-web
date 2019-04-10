@@ -1,17 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { MatPaginator, MatSort, MatTableDataSource, MatTab } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-
-import { BaseModel } from 'app/model/base.model';
+import { Location } from '@angular/common';
+import { AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from 'app/service/generic-crud/generic-crud.service';
 import { MessageType, SwalType } from 'app/service/toast-notification-service/message-type.enum';
 import { ToastService } from 'app/service/toast-notification-service/toast-service/toast.service';
+import { Observable } from 'rxjs/Observable';
 import swal from 'sweetalert2';
-import { TranslationService } from 'app/service/translation/translation.service';
-import { Paginable } from 'app/model/paginable.model';
-import { StatusEntity } from 'app/model/statusEntity.enum';
+
 
 declare const $: any;
 
@@ -32,12 +28,13 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
     list: TModel[];
 
     constructor(
-        public translateService: TranslationService,
         public service: TService,
         public router: Router,
         public activatedRoute: ActivatedRoute,
         public location: Location
-    ) { }
+    ) {
+
+    }
 
     ngOnInit() {
         this.dataSource = new MatTableDataSource(this.list);
@@ -56,18 +53,22 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
         return [];
     }
 
-    loadList(): Observable<Paginable<TModel>> {
+    loadList(): Observable<TModel[]> {
 
-        return this.service.getAllList();
+        return this.service.getAll();
 
     }
 
     refreshData() {
+
         const _onFinish = (list) => {
-            this.dataSource.data = list.content;
+            this.dataSource.data = list;
+            console.log(this.dataSource.data);
+
             // Nao esconde mais a sidebar
             // Util.hideSideBar();
         };
+
         this.loadList().subscribe(_onFinish, () => _onFinish([]));
     }
 
@@ -98,22 +99,9 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
     delete(obj: TModel) {
         this.service.delete(obj.id).subscribe(
             success => {
-                setTimeout(() => {
-                    this.refreshData();
-                }, 100);
+                this.refreshData();
 
                 this.toast(this.recordDeletedMsg, MessageType.SUCCESS);
-            },
-            error => {
-                console.log(`erro: ${error}`);
-            }
-        );
-    }
-
-    changeStatus(obj: TModel) {
-        this.service.changeStatus(obj.id).subscribe(
-            success => {
-                this.refreshData();
             },
             error => {
                 console.log(`erro: ${error}`);
@@ -148,7 +136,7 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
     }
 
     deleteItem(obj: TModel) {
-        swal(this.swalContent(this.translateService.instant(SwalType.DELETE))
+        swal(this.swalContent(SwalType.DELETE)
         ).then(function () {
             this.delete(obj);
         }.bind(this)).catch(swal.noop);
@@ -171,18 +159,18 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
         if (obj.status === 'ATIVO') {
             this.disableItem(obj);
         } else {
-            this.enable(obj);
+            this.enable(obj)
         }
     }
 
     swalContent(text: string, type = 'warning'): any {
         return {
-            title: this.translateService.translate('Tem certeza?'),
+            title: 'Tem certeza?',
             text: text,
             type: type,
             showCancelButton: true,
-            confirmButtonText: this.translateService.translate('Sim') + '!',
-            cancelButtonText: this.translateService.translate('Não'),
+            confirmButtonText: 'Sim!',
+            cancelButtonText: 'Não',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false
@@ -199,11 +187,11 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
             this.displayedColumns = this.table._contentColumnDefs._results.map(o => o.name);
         }.bind(this), 0);
 
-        this.paginator._intl.itemsPerPageLabel = this.translateService.translate('Itens por página');
-        this.paginator._intl.firstPageLabel = this.translateService.translate('Primeira página');
-        this.paginator._intl.nextPageLabel = this.translateService.translate('Próxima página');
-        this.paginator._intl.previousPageLabel = this.translateService.translate('Página anterior');
-        this.paginator._intl.lastPageLabel = this.translateService.translate('Última página');
+        this.paginator._intl.itemsPerPageLabel = 'Itens por página';
+        this.paginator._intl.firstPageLabel = 'Primeira página';
+        this.paginator._intl.nextPageLabel = 'Próxima página';
+        this.paginator._intl.previousPageLabel = 'Página anterior';
+        this.paginator._intl.lastPageLabel = 'Última página';
         this.paginator._intl.getRangeLabel = this.getPortugueseRangeLabel;
 
         $('.generic-modal').on('hide.bs.modal', (e) => {
@@ -212,13 +200,14 @@ export abstract class GenericListComponent<TModel extends any, TService extends 
     }
 
     getPortugueseRangeLabel(page: number, pageSize: number, length: number) {
-        if (length === 0 || pageSize === 0) {
+        if (length == 0 || pageSize == 0) {
             return `0 de ${length}`;
         }
         length = Math.max(length, 0);
         const startIndex = page * pageSize;
         const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
         return `${startIndex + 1} - ${endIndex} de ${length}`;
+
     }
 
     applyFilter(filterValue: string) {

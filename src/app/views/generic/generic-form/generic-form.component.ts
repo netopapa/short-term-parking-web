@@ -1,15 +1,14 @@
-import { OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { ChangeDetectorRef, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseModel } from 'app/model/base.model';
 import { CrudService } from 'app/service/generic-crud/generic-crud.service';
 import { MessageType } from 'app/service/toast-notification-service/message-type.enum';
 import { ToastService } from 'app/service/toast-notification-service/toast-service/toast.service';
-
 import { BaseCommons } from 'app/views/generic/generic-form/base-commons';
-import { FileService } from '../../../service/file/file.service';
-import { NgForm } from '@angular/forms';
+
+
 
 declare var $: any;
 
@@ -30,9 +29,8 @@ export class GenericFormComponent<TModel extends BaseModel, TService extends Cru
         public location: Location,
         public modelType: new () => TModel,
         public cd?: ChangeDetectorRef,
-        public fileService?: FileService,
     ) {
-        super(fileService);
+        super();
     }
 
     ngOnInit() {

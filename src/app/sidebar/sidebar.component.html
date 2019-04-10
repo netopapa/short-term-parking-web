@@ -1,10 +1,10 @@
 <div class="logo">
     <div class="logo-normal">
         <div class="logo-img">
-            <img src="/assets/img/logo/logo_2.png" />
+            <img src="/assets/img/logo/logo.png" />
         </div>
         <a href="#" class="simple-text">
-            Access Control
+            Parking Panel
         </a>
     </div>
 </div>
@@ -48,14 +48,14 @@
                     <ng-container>
                         <a class="custom-link" [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
                             <i class="material-icons">{{menuitem.icontype}}</i>
-                            <p>{{menuitem.title | translate}}</p>
+                            <p>{{menuitem.title}}</p>
                         </a>
                     </ng-container>
                     <!--If it have a submenu-->
-                    <a class="custom-link" data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'"
-                        (click)="updatePS()">
+                    <a class="custom-link" data-toggle="collapse" href="#{{menuitem.collapse}}"
+                        *ngIf="menuitem.type === 'sub'" (click)="updatePS()">
                         <i class="material-icons">{{menuitem.icontype}}</i>
-                        <p>{{menuitem.title | translate}}
+                        <p>{{menuitem.title}}
                             <b class="caret"></b>
                         </p>
                     </a>
@@ -66,8 +66,8 @@
                             <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
                                 <ng-container>
                                     <a [routerLink]="[menuitem.path, childitem.path]">
-                                        <span class="sidebar-mini">{{childitem.ab | translate}}</span>
-                                        <span class="sidebar-normal">{{childitem.title | translate}}</span>
+                                        <span class="sidebar-mini">{{childitem.ab}}</span>
+                                        <span class="sidebar-normal">{{childitem.title}}</span>
                                     </a>
                                 </ng-container>
                             </li>

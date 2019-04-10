@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
-
-import { ErrorService } from 'app/service/toast-notification-service/error-service/error.service';
 import { Constant } from 'app/constant/constant';
+import { ErrorService } from 'app/service/toast-notification-service/error-service/error.service';
+import { Observable } from 'rxjs/Observable';
 import { RestService } from '../rest/rest.service';
-import { TranslationService } from '../translation/translation.service';
-import { Paginable } from 'app/model/paginable.model';
+
 
 @Injectable()
 export class CrudService<T extends any> extends RestService {
@@ -18,19 +16,22 @@ export class CrudService<T extends any> extends RestService {
     http: Http,
     baseUrl: string,
     errorHandler: ErrorService,
-    translate: TranslationService,
     public activatedRoute: ActivatedRoute
   ) {
-    super(http, translate, errorHandler);
+    super(http, errorHandler);
     this.baseURL += baseUrl;
   }
 
   public getAll(): Observable<Array<T>> {
     return this.get(this.baseURL);
   }
-  public getAllList(): Observable<Paginable<T>> {
-    return this.get(`${this.baseURL + 'list/'}?search=statusEntity:${'ALL'}`);
 
+  public getActives(route?: string): Observable<Array<T>> {
+    if (route !== undefined) {
+      return this.get(this.baseURL + 'findActives');
+    } else {
+      return this.get(this.baseURL + 'findActives');
+    }
   }
 
   public getOne(id: String): Observable<T> {
@@ -61,7 +62,7 @@ export class CrudService<T extends any> extends RestService {
   }
 
   public delete(id: string): Observable<any> {
-    const deleteURL = this.baseURL + 'id/';
+    const deleteURL = this.baseURL;
     return this.remove(deleteURL, id);
   }
 
@@ -74,11 +75,6 @@ export class CrudService<T extends any> extends RestService {
   public disable(id: string): Observable<any> {
     const disableURL = this.baseURL + 'disable/' + id;
     return this.post(disableURL);
-  }
-
-  public changeStatus(id: string): Observable<any> {
-    const changeStatusURL = this.baseURL + 'changestatus/' + id;
-    return this.put(changeStatusURL, null);
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import PerfectScrollbar from 'perfect-scrollbar';
 import { Router } from '@angular/router';
 
 declare const $: any;
@@ -12,7 +11,6 @@ export interface RouteInfo {
     icontype: string;
     collapse?: string;
     children?: ChildrenItems[];
-    role?: string;
 }
 
 export interface ChildrenItems {
@@ -20,7 +18,6 @@ export interface ChildrenItems {
     title: string;
     ab: string;
     type?: string;
-    role?: string;
 }
 
 //Menu Items
@@ -31,53 +28,17 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         icontype: 'dashboard'
     },
-    {
-        path: '/persons',
-        title: 'Pessoas',
-        type: 'sub',
-        icontype: 'person',
-        collapse: 'Pessoas',
-        children: [
-            { path: 'employee', title: 'Funcionários', ab: 'FNC' },
-            { path: 'visitor', title: 'Visitantes', ab: 'LV' },
-        ]
-    },
-    {
-        path: '/environments',
-        title: 'Ambientes',
-        type: 'sub',
-        icontype: 'home',
-        collapse: 'Ambientes',
-        children: [
-            { path: 'unit', title: 'Unidades', ab: 'UND' },
-            { path: 'area', title: 'Áreas', ab: 'AR' },
-            { path: 'sector', title: 'Setores', ab: 'STR' },
-            { path: 'line', title: 'Linhas de produção', ab: 'LP' },
-            { path: 'station', title: 'Estações', ab: 'EST' },
-        ]
-    },
-    {
-        path: '/settings',
-        title: 'Configurações',
-        type: 'sub',
-        icontype: 'settings',
-        collapse: 'Configurações',
-        children: [
-            { path: 'user', title: 'Usuários', ab: 'USR' },
-        ]
-    },
-    {
-        path: '/devices',
-        title: 'Dispositivos',
-        type: 'sub',
-        icontype: 'devices_other',
-        collapse: 'Dispositivos',
-        children: [
-            { path: 'camera', title: 'Câmeras', ab: 'LC' },
-            { path: 'gate', title: 'Catracas', ab: 'CT'}
-        ]
-    },
-
+    // {
+    //     path: '/persons',
+    //     title: 'Pessoas',
+    //     type: 'sub',
+    //     icontype: 'person',
+    //     collapse: 'Pessoas',
+    //     children: [
+    //         { path: 'employee', title: 'Funcionários', ab: 'FNC' },
+    //         { path: 'visitor', title: 'Visitantes', ab: 'LV' },
+    //     ]
+    // },
 ];
 @Component({
     selector: 'app-sidebar-cmp',
@@ -88,6 +49,7 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
 
     constructor(private router: Router) { }
+
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
@@ -98,6 +60,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
+
     updatePS(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
@@ -105,16 +68,12 @@ export class SidebarComponent implements OnInit {
         }
         $('.collapse').collapse('hide');
     }
+
     isMac(): boolean {
         let bool = false;
         if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
             bool = true;
         }
         return bool;
-    }
-    logout() {
-        localStorage.clear();
-
-        this.router.navigate(['#']);
     }
 }

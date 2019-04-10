@@ -5,7 +5,6 @@ import { NavbarComponent } from './navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatSelectModule, MatTooltipModule, MatInputModule } from '@angular/material';
 import { MdModule } from 'app/md/md.module';
-import { TranslationPipeModule } from '../translation/translation-pipe.module';
 
 @NgModule({
     imports: [
@@ -16,7 +15,6 @@ import { TranslationPipeModule } from '../translation/translation-pipe.module';
         MatInputModule,
         RouterModule,
         MdModule,
-        TranslationPipeModule,
         MatButtonModule,
         MatSelectModule,
     ],

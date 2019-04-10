@@ -126,12 +126,11 @@
                 padding-right: 10px;
 
                 &.custom-link {
-                    border-radius: 8px;
-                    border: 1px solid #666;
+                    border-radius: 4px;
                     background-color: #1b1b1b;
 
                     i {
-                        color: #D2AD45;
+                        color: #4e8e26;
                     }
                 }
 
@@ -148,7 +147,7 @@
 
             &:hover>a,
             &.active>[data-toggle="collapse"] {
-                background-color: rgba(210, 173, 69, 0.15);
+                background-color: rgba(78, 142, 38, 0.27);
                 color: $black-color;
                 box-shadow: none;
             }
@@ -392,7 +391,7 @@
     }
 
     &[data-active-color="spare"] {
-        @include set-background-color-button(#D2AD45);
+        @include set-background-color-button(#4e8e26);
     }
 
     &[data-active-color="white"] {
