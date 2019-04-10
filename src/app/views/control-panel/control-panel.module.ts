@@ -1,15 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InsideListComponent } from './inside-list/inside-list.component';
-import { RegistrationListComponent } from './registration-list/registration-list.component';
-import { CarListComponent } from './car-list/car-list.component';
+import { NgModule } from '@angular/core';
 import { CheckinFormComponent } from './checkin-form/checkin-form.component';
 import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
+import { InsideListComponent } from './inside-list/inside-list.component';
+import { RegistrationListComponent } from './registration-list/registration-list.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [InsideListComponent, RegistrationListComponent, CarListComponent, CheckinFormComponent, CheckoutFormComponent]
+  declarations: [
+    InsideListComponent,
+    RegistrationListComponent,
+    CheckinFormComponent,
+    CheckoutFormComponent
+  ]
 })
 export class ControlPanelModule { }

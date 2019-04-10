@@ -14,6 +14,10 @@ export const AppRoutes: Routes = [
                 path: 'control',
                 loadChildren: './views/control-panel/control-panel.module#ControlPanelModule',
             },
+            {
+                path: 'car',
+                loadChildren: './views/car/car.module#CarModule',
+            },
         ]
     }
 ];

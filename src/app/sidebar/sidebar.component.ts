@@ -41,22 +41,11 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'assignment'
     },
     {
-        path: '/control/carros',
-        title: 'Lista de Carros',
+        path: '/car',
+        title: 'Carros',
         type: 'link',
         icontype: 'directions_car'
-    },
-    // {
-    //     path: '/persons',
-    //     title: 'Pessoas',
-    //     type: 'sub',
-    //     icontype: 'person',
-    //     collapse: 'Pessoas',
-    //     children: [
-    //         { path: 'employee', title: 'Funcionários', ab: 'FNC' },
-    //         { path: 'visitor', title: 'Visitantes', ab: 'LV' },
-    //     ]
-    // },
+    }
 ];
 @Component({
     selector: 'app-sidebar-cmp',
