@@ -20,8 +20,7 @@ export class RestService {
   constructor(
     public http: Http,
     public errorHandler?: ErrorService,
-  ) {
-  }
+  ) { }
 
   getRequestOptions() {
     const options = new RequestOptions({ headers: this.headers });
