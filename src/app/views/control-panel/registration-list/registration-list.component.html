@@ -1,3 +1,85 @@
-<p>
-  registration-list works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="spare">
+            <i class="material-icons">list</i>
+          </div>
+          <div class="card-content">
+            <h5 class="card-title">
+              <strong>Registros Anteriores</strong>
+            </h5>
+
+            <div class="row">
+              <div class="col-sm-6 pull-right">
+                <mat-form-field class="busca">
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pesquisar">
+                  <i class="material-icons">search</i>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="example-container">
+
+              <mat-table #table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="plate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Placa
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.car.plate }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="model">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.car.model }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="color">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Cor
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.car.color }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="checkin">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Entrada
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.checkin | date: 'h:mm' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="checkout">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Saída
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.checkout | date: 'h:mm' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="value">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Pago
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.value | currency:'BRL':true }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="acoes">
+                  <mat-header-cell class="text-right" *matHeaderCellDef> Opções </mat-header-cell>
+                  <mat-cell class="text-right acoes" *matCellDef="let item">
+                    <button class="btn btn-simple btn-danger btn-icon edit" matTooltip="Excluir"
+                      [matTooltipPosition]="'left'" data-toggle="modal" (click)="deleteItem(item)">
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let item; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+          </div>
+          <app-checkin-form #checkinForm></app-checkin-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

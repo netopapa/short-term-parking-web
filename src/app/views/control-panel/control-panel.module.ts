@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'app/app.module';
@@ -24,6 +24,12 @@ import { RegistrationListComponent } from './registration-list/registration-list
     RegistrationListComponent,
     CheckinFormComponent,
     CheckoutFormComponent
+  ],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
   ]
 })
 export class ControlPanelModule { }
