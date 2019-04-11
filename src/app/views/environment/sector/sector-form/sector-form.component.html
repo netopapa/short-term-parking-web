@@ -1,0 +1,62 @@
+<div class="modal fade generic-modal" id="sectorModal" tabindex="-1" role="dialog" aria-labelledby="sectorModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="card-header card-header-icon" data-background-color="spare">
+        <i *ngIf="edit" class="material-icons">edit</i>
+        <i *ngIf="!edit" class="material-icons">add</i>
+      </div>
+      <h5 class="modal-title">
+        <strong *ngIf="edit">{{'Editar Setor' | translate}}</strong>
+        <strong *ngIf="!edit">{{'Nova Setor' | translate}}</strong>
+      </h5>
+
+      <div class="modal-body">
+
+        <form class="form-horizontal" #sectorForm="ngForm">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.name" placeholder="{{'Nome' | translate}}" name="name" type="text"
+                  pattern="(^[\S]+(\s[\S]+)*$)" maxlength="255" required>
+              </mat-form-field>
+              <p *ngIf="alreadyAssociated(obj.area.id)" class="text-danger">Altere o nome ou selecione outra área*
+              </p>
+            </div>
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.code" placeholder="{{'Defina o código do setor' | translate}}"
+                  name="code" type="text" pattern="(^[\S]+(\s[\S]+)*$)" minlength="4" maxlength="15" required>
+              </mat-form-field>
+              <p *ngIf="codeAlreadyExists(obj, sectors)" class="text-danger">Código já existente*</p>
+            </div>
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <mat-select [(ngModel)]="obj.area.id" placeholder="{{'Selecione area' | translate}}" name="area"
+                  required>
+                  <mat-option *ngFor="let area of areas" [value]="area.id" [disabled]="alreadyAssociated(area.id)">
+                    {{ area.name }} da unidade {{area.unit.name}} {{alreadyAssociated(area.id) ? '(Setor já existente nesta área)' : ''}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row btn-space">
+            <button (click)="clearForm(sectorForm)" type="button"
+              class='btn btn-round  pull-left'>{{'Limpar' | translate}}</button>
+
+            <button (click)="updateOrCreate('#sectorModal')" type="submit"
+              class='btn btn-finish btn-fill btn-round btn-spare pull-right'
+              [disabled]="!sectorForm.form.valid || alreadyAssociated(obj.area.id) || codeAlreadyExists(obj, sectors)">{{'Salvar' | translate}}</button>
+
+            <button (click)="closeModal()" class='btn btn-round  pull-right'>{{'Voltar' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

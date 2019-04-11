@@ -1,0 +1,58 @@
+<div class="modal fade generic-modal" id="visitorModal" tabindex="-1" role="dialog" aria-labelledby="visitorModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="card-header card-header-icon" data-background-color="spare">
+        <i *ngIf="edit" class="material-icons">edit</i>
+        <i *ngIf="!edit" class="material-icons">add</i>
+      </div>
+      <h5 class="modal-title">
+        <strong *ngIf="edit">Editar Visitante</strong>
+        <strong *ngIf="!edit">Novo Visitante</strong>
+      </h5>
+
+      <div class="modal-body">
+
+        <form class="form-horizontal" #visitorForm="ngForm">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.name" placeholder="{{'Nome' | translate}}" name="name" type="text"
+                  maxlength="255" pattern="(^[A-Za-zÀ-ÖØ-öø-ÿ]+(\s[A-Za-zÀ-ÖØ-öø-ÿ]+)*$)" required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.observation" placeholder="{{'Observação' | translate}}"
+                  name="observation" type="text" maxlength="255" required>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.document" placeholder="{{'Documento' | translate}}" name="document"
+                  type="text" minlength="8" pattern="^[0-9]+$" maxlength="8" required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.origin" placeholder="{{'Origem' | translate}}" name="origin"
+                  type="text" maxlength="255" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row btn-space">
+            <button (click)="clearForm(visitorForm)" type="button"
+              class='btn btn-round  pull-left'>{{'Limpar' | translate}}</button>
+
+            <button (click)="updateOrCreate('#visitorModal')" type="submit"
+              class='btn btn-finish btn-fill btn-round btn-spare pull-right'
+              [disabled]="!visitorForm.form.valid">{{'Salvar' | translate}}</button>
+
+            <button (click)="closeModal()" class='btn btn-round  pull-right'>{{'Voltar' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

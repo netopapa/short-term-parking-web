@@ -1,0 +1,35 @@
+<div class="wrapper wrapper-full-page centralizado">
+    <form #loginForm="ngForm">
+        <div class="card card-login card-hidden">
+            <div class="card-header text-center" data-background-color="black">
+                <img class="card-title logo" src="./assets/img/logo/logo.png" />
+            </div>
+            <div class="card-content">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">face</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'Nome de Usuário' | translate}}</label>
+                        <input name="cpf" type="text" class="form-control" [(ngModel)]="loginObj.username" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">lock_outline</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'Senha' | translate}}</label>
+                        <input name="senha" type="password" class="form-control" [(ngModel)]="loginObj.password"
+                            required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer text-center">
+                <button type="submit" class="btn btn-spare btn-wd btn-lg" (click)="login()" [disabled]="!loginForm.form.valid">
+                    {{'Entrar' | translate}}</button>
+            </div>
+        </div>
+    </form>
+</div>

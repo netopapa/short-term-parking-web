@@ -1,0 +1,62 @@
+<div class="modal fade generic-modal" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="areaModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="card-header card-header-icon" data-background-color="spare">
+        <i *ngIf="edit" class="material-icons">edit</i>
+        <i *ngIf="!edit" class="material-icons">add</i>
+      </div>
+      <h5 class="modal-title">
+        <strong *ngIf="edit">Editar Área</strong>
+        <strong *ngIf="!edit">Nova Área</strong>
+      </h5>
+
+      <div class="modal-body">
+
+        <form class="form-horizontal" #areaForm="ngForm">
+
+          <div class="row form-field">
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.name" placeholder="{{'Nome' | translate}}" name="name"
+                  pattern="(^[\S]+(\s[\S]+)*$)" type="text" maxlength="255" required>
+              </mat-form-field>
+              <p *ngIf="alreadyAssociated(obj.unit.id)" class="text-danger">Altere o nome ou selecione outra unidade*</p>
+            </div>
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.code" placeholder="{{'Defina o código da área' | translate}}"
+                  name="code" type="text" pattern="(^[\S]+(\s[\S]+)*$)" minlength="4" maxlength="15">
+              </mat-form-field>
+              <p *ngIf="codeAlreadyExists(obj, areas)" class="text-danger">Código já existente*</p>
+            </div>
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <mat-select [(ngModel)]="obj.unit.id" placeholder="{{getHolderUnit() | translate}}" name="unit"
+                  required>
+                  <mat-option *ngFor="let unit of unities" [value]="unit.id" [disabled]="alreadyAssociated(unit.id)">
+                    {{ unit.name }} {{alreadyAssociated(unit.id) ? '(Área já existente nesta unidade)' : ''}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class=" row btn-space">
+            <button (click)="clearForm(areaForm)" type="button"
+              class='btn btn-round  pull-left'>{{'Limpar' | translate}}</button>
+
+            <button (click)="updateOrCreate('#areaModal')" type="submit"
+              class='btn btn-finish btn-fill btn-round btn-spare pull-right'
+              [disabled]="!areaForm.form.valid || alreadyAssociated(obj.unit.id) || codeAlreadyExists(obj, areas)">{{'Salvar' | translate}}</button>
+
+            <button (click)="closeModal()" class='btn btn-round  pull-right'>{{'Voltar' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

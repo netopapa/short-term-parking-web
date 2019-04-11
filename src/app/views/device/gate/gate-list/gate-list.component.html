@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <button (click)="showModal()" class="btn btn-spare btn-raised pull-right">
+          <i class="material-icons">add</i> Catraca
+        </button>
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="spare">
+            <i class="material-icons">list</i>
+          </div>
+          <div class="card-content">
+            <h5 class="card-content">
+              <strong>Lista de Catracas</strong>
+            </h5>
+            <div class="row">
+              <div class="col-sm-6 pull-right">
+                <mat-form-field class="busca">
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+                  <i class="material-icons">search</i>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="example-container">
+              <mat-table #table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="code">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Código
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.code }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="model">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.gmodel }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="area">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Área
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.area != null?item.area.name: '--' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="statusEntity">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Status
+                  </mat-header-cell>
+                  <mat-cell
+                    [ngClass]="{'green-text' : item.statusEntity === 'ENABLED', 'red-text' : item.statusEntity === 'DISABLED'}"
+                    *matCellDef="let item">
+                    <strong *ngIf="item.statusEntity === 'ENABLED'">{{'Ativo' | translate}}</strong>
+                    <strong *ngIf="item.statusEntity === 'DISABLED'">{{ 'Inativo' | translate}}</strong>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="netStat">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Status da Conexão
+                  </mat-header-cell>
+                  <mat-cell
+                    [ngClass]="{'green-text' : item.netStat === 'ONLINE', 'red-text' : item.netStat === 'OFFLINE'}"
+                    *matCellDef="let item">
+                    <strong *ngIf="item.netStat === 'ONLINE'">{{'Online' | translate}}</strong>
+                    <strong *ngIf="item.netStat === 'OFFLINE'">{{ 'Offline' | translate}}</strong>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="acoes">
+                  <mat-header-cell class="text-right" *matHeaderCellDef> Ações </mat-header-cell>
+                  <mat-cell class="text-right acoes" *matCellDef="let item">
+                    <button class="btn btn-simple btn-info btn-icon edit" matTooltip="Editar"
+                      [matTooltipPosition]="'left'" (click)="showModal(item)">
+                      <i class="material-icons">edit</i>
+                    </button>
+
+                    <div class="togglebutton">
+                      <ng-container *ngIf="item.statusEntity === 'ENABLED'">
+                        <label matTooltip="{{'Desativar' | translate}}" [matTooltipPosition]="'left'">
+                          <input type="checkbox" [checked]="item.statusEntity === 'ENABLED'"
+                            (click)="changeStatus(item)">
+                        </label>
+                      </ng-container>
+                      <ng-container *ngIf="item.statusEntity === 'DISABLED'">
+                        <label matTooltip="{{'Ativar' | translate}}" [matTooltipPosition]="'left'">
+                          <input type="checkbox" [checked]="item.statusEntity === 'ENABLED'"
+                            (click)="changeStatus(item)">
+                        </label>
+                      </ng-container>
+                    </div>
+
+                    <button class="btn btn-simple btn-danger btn-icon edit" matTooltip="Excluir"
+                      [matTooltipPosition]="'left'" data-toggle="modal" (click)="deleteItem(item)">
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let item; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+            <app-gate-form #gateModal></app-gate-form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

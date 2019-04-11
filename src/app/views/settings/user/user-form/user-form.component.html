@@ -1,0 +1,65 @@
+<div class="modal fade generic-modal" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="card-header card-header-icon" data-background-color="spare">
+        <i *ngIf="edit" class="material-icons">edit</i>
+        <i *ngIf="!edit" class="material-icons">add</i>
+      </div>
+      <h5 class="modal-title">
+        <strong *ngIf="edit">{{'Editar Usuário' | translate}}</strong>
+        <strong *ngIf="!edit">{{'Novo Usuário' | translate}}</strong>
+      </h5>
+
+      <div class="modal-body">
+
+        <form class="form-horizontal" #userForm="ngForm">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.name" placeholder="{{'Nome' | translate}}" name="name" type="text"
+                  maxlength="255" pattern="(^[A-Za-zÀ-ÖØ-öø-ÿ]+(\s[A-Za-zÀ-ÖØ-öø-ÿ]+)*$)" required>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.username" placeholder="{{'Nome de usuário' | translate}}"
+                  name="username" type="text" maxlength="255" pattern="(^[A-Za-zÀ-ÖØ-öø-ÿ]+(\s[A-Za-zÀ-ÖØ-öø-ÿ]+)*$)"
+                  required>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.password" placeholder="{{'Senha' | translate}}" name="password"
+                  type="password" minlength="6" maxlength="20" required>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input matInput [(ngModel)]="validPass" placeholder="{{'Confirme senha' | translate}}"
+                  name="validPass" type="password" minlength="6" maxlength="20" required>
+              </mat-form-field>
+              <p *ngIf="!passConfirmed()" class="text-danger">Senhas não conferem*</p>
+            </div>
+          </div>
+
+          <div class="row btn-space">
+            <button (click)="clearForm(userForm)" type="button"
+              class='btn btn-round  pull-left'>{{'Limpar' | translate}}</button>
+
+            <button (click)="updateOrCreate('#userModal')" type="submit"
+              class='btn btn-finish btn-fill btn-round btn-spare pull-right'
+              [disabled]="!userForm.form.valid || !passConfirmed()">{{'Salvar' | translate}}</button>
+
+            <button (click)="closeModal()" class='btn btn-round  pull-right'>{{'Voltar' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
