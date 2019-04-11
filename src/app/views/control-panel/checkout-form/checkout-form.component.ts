@@ -29,4 +29,8 @@ export class CheckoutFormComponent extends GenericFormComponent<Registration, Re
     });
   }
 
+  beforeShowModal(): void {
+    this.obj.checkout = new Date();
+  }
+
 }

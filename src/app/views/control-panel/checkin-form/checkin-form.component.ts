@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class CheckinFormComponent extends GenericFormComponent<Registration, RegistrationService> implements AfterViewInit {
 
+  hour = '';
+
   constructor(
     service: RegistrationService,
     router: Router,
@@ -27,6 +29,10 @@ export class CheckinFormComponent extends GenericFormComponent<Registration, Reg
     $('#checkinModal').on('hide.bs.modal', () => {
       this.obj = new Registration();
     });
+  }
+
+  beforeShowModal() {
+    this.hour = this.obj.checkin.toTimeString().slice(0, 5);
   }
 
 }

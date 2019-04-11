@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'app/app.module';
@@ -9,6 +10,8 @@ import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
 import { ControlRouter } from './control-panel.router';
 import { InsideListComponent } from './inside-list/inside-list.component';
 import { RegistrationListComponent } from './registration-list/registration-list.component';
+
+registerLocaleData(localePt);
 
 @NgModule({
   imports: [
@@ -26,10 +29,7 @@ import { RegistrationListComponent } from './registration-list/registration-list
     CheckoutFormComponent
   ],
   providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'pt-BR'
-    }
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })
 export class ControlPanelModule { }

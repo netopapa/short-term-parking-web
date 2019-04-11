@@ -5,6 +5,7 @@ import { Registration } from 'app/model/registration.model';
 import { RegistrationService } from 'app/service/registration/registration.service';
 import { GenericListComponent } from 'app/views/generic/generic-list/generic-list.component';
 import { CheckinFormComponent } from '../checkin-form/checkin-form.component';
+import { CheckoutFormComponent } from '../checkout-form/checkout-form.component';
 
 @Component({
   selector: 'app-inside-list',
@@ -14,6 +15,7 @@ import { CheckinFormComponent } from '../checkin-form/checkin-form.component';
 export class InsideListComponent extends GenericListComponent<Registration, RegistrationService> {
 
   @ViewChild('checkinForm') checkinForm: CheckinFormComponent;
+  @ViewChild('checkoutForm') checkoutForm: CheckoutFormComponent;
 
   constructor(
     service: RegistrationService,
@@ -26,6 +28,10 @@ export class InsideListComponent extends GenericListComponent<Registration, Regi
 
   showModal(checkin?: Registration): void {
     this.checkinForm.initModal('#checkinModal', checkin);
+  }
+
+  showExitModal(checkout: Registration): void {
+    this.checkoutForm.initModal('#checkoutModal', checkout);
   }
 
 }

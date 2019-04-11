@@ -22,41 +22,36 @@
           <div class="row">
 
             <div class="col-sm-6">
-              <div class="form-group label-floating is-empty">
-                <label class="control-label"></label>
-                <input placeholder="Placa" class="form-control" type="text" maxlength="20" name="plate"
-                  [(ngModel)]="obj.car.plate" required>
-              </div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.car.plate" placeholder="Placa" name="plate" type="text" maxlength="7"
+                  required>
+              </mat-form-field>
             </div>
 
             <div class="col-sm-6">
-              <div class="form-group label-floating is-empty">
-                <label class="control-label"></label>
-                <input placeholder="Modelo" class="form-control" type="text" maxlength="7" name="model"
-                  [(ngModel)]="obj.car.model" required>
-              </div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.car.model" placeholder="Modelo" name="model" type="text" maxlength="20"
+                  required>
+              </mat-form-field>
             </div>
 
             <div class="col-sm-6">
-              <div class="form-group label-floating is-empty">
-                <label class="control-label"></label>
-                <input placeholder="Cor" class="form-control" type="text" maxlength="15" name="color"
-                  [(ngModel)]="obj.car.color" required>
-              </div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="obj.car.color" placeholder="Cor" name="color" type="text" maxlength="20"
+                  required>
+              </mat-form-field>
             </div>
 
             <div class="col-sm-6">
-              <div class="form-group label-floating is-empty">
-                <label class="control-label"></label>
-                <input placeholder="Cor" class="form-control" type="time" name="checkin"
-                  [(ngModel)]="obj.checkin" required>
-              </div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="hour" placeholder="Entrada" name="checkin" type="time" disabled required>
+              </mat-form-field>
             </div>
 
             <div class="btn-space">
               <button class="btn btn-spare btn-round btn-raised pull-right" [disabled]="!checkinForm.form.valid"
                 (click)="updateOrCreate('#checkinModal')">
-                Salvar
+                Liberar entrada
               </button>
               <button type="button" class="btn btn-round pull-right" (click)="closeModal('#checkinModal')">
                 Voltar

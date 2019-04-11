@@ -164,7 +164,10 @@ export class GenericFormComponent<TModel extends BaseModel, TService extends Cru
         } else {
             this.edit = false;
         }
+        this.beforeShowModal();
         $(idModal).modal('show');
+
     }
 
+    beforeShowModal(): void { }
 }

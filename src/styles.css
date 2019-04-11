@@ -141,7 +141,6 @@ mat-header-row * {
 }
 
 .change-modal {
-    width: 55%;
     display: block;
     margin: 0 auto;
 }
