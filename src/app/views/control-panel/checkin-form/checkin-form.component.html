@@ -1,3 +1,70 @@
-<p>
-  checkin-form works!
-</p>
+<div class="modal fade generic-modal" id="checkinModal" tabindex="-1" role="dialog" aria-labelledby="checkinModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content change-modal">
+
+      <div class="card-header card-header-icon" data-background-color="spare">
+        <i *ngIf="!edit" class="material-icons">add</i>
+        <i *ngIf="edit" class="material-icons">edit</i>
+      </div>
+      <h5 class="modal-title">
+        <strong *ngIf="!edit">Fazer Check-in</strong>
+        <strong *ngIf="edit">Edição de Check-in</strong>
+        <button type="button" class="close fix-close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </h5>
+
+      <div class="modal-body">
+
+        <form class="form-horizontal" #checkinForm="ngForm">
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group label-floating is-empty">
+                <label class="control-label"></label>
+                <input placeholder="Placa" class="form-control" type="text" maxlength="20" name="plate"
+                  [(ngModel)]="obj.car.plate" required>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group label-floating is-empty">
+                <label class="control-label"></label>
+                <input placeholder="Modelo" class="form-control" type="text" maxlength="7" name="model"
+                  [(ngModel)]="obj.car.model" required>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group label-floating is-empty">
+                <label class="control-label"></label>
+                <input placeholder="Cor" class="form-control" type="text" maxlength="15" name="color"
+                  [(ngModel)]="obj.car.color" required>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group label-floating is-empty">
+                <label class="control-label"></label>
+                <input placeholder="Cor" class="form-control" type="time" name="checkin"
+                  [(ngModel)]="obj.checkin" required>
+              </div>
+            </div>
+
+            <div class="btn-space">
+              <button class="btn btn-spare btn-round btn-raised pull-right" [disabled]="!checkinForm.form.valid"
+                (click)="updateOrCreate('#checkinModal')">
+                Salvar
+              </button>
+              <button type="button" class="btn btn-round pull-right" (click)="closeModal('#checkinModal')">
+                Voltar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

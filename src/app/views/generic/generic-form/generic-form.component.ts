@@ -8,8 +8,6 @@ import { MessageType } from 'app/service/toast-notification-service/message-type
 import { ToastService } from 'app/service/toast-notification-service/toast-service/toast.service';
 import { BaseCommons } from 'app/views/generic/generic-form/base-commons';
 
-
-
 declare var $: any;
 
 export class GenericFormComponent<TModel extends BaseModel, TService extends CrudService<TModel>>
@@ -153,6 +151,20 @@ export class GenericFormComponent<TModel extends BaseModel, TService extends Cru
                 this.router.navigate([this.getParentPath()]);
             }
         }
+    }
+
+    closeModal(idModal: string): void {
+        $(idModal).modal('hide');
+    }
+
+    public initModal(idModal: string, item?: any): void {
+        if (item) {
+            Object.assign(this.obj, item);
+            this.edit = true;
+        } else {
+            this.edit = false;
+        }
+        $(idModal).modal('show');
     }
 
 }

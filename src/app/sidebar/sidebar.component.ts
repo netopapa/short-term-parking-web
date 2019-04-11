@@ -30,19 +30,19 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/control/inside',
-        title: 'Carros Estacionados',
+        title: 'Veículos Estacionados',
         type: 'link',
         icontype: 'timer'
     },
     {
-        path: '/control/registros',
+        path: '/control/log',
         title: 'Registros Anteriores',
         type: 'link',
         icontype: 'assignment'
     },
     {
         path: '/car',
-        title: 'Carros',
+        title: 'Veículos',
         type: 'link',
         icontype: 'directions_car'
     }

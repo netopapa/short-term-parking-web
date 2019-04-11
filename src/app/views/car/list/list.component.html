@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <button (click)="showModal()" class="btn btn-spare btn-raised pull-right">
-          <i class="material-icons">add</i> Carro
+          <i class="material-icons">add</i> Veículo
         </button>
         <div class="card">
           <div class="card-header card-header-icon" data-background-color="spare">
@@ -11,7 +11,7 @@
           </div>
           <div class="card-content">
             <h5 class="card-title">
-              <strong>Lista de Carros</strong>
+              <strong>Lista de Veículos</strong>
             </h5>
 
             <div class="row">
@@ -45,7 +45,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="acoes">
-                  <mat-header-cell class="text-right" *matHeaderCellDef> Ações </mat-header-cell>
+                  <mat-header-cell class="text-right" *matHeaderCellDef> Opções </mat-header-cell>
                   <mat-cell class="text-right acoes" *matCellDef="let item">
                     <button class="btn btn-simple btn-info btn-icon edit" matTooltip="Editar"
                       [matTooltipPosition]="'left'" (click)="showModal(item)">
@@ -66,6 +66,7 @@
               <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
             </div>
           </div>
+          <app-form #carForm></app-form>
         </div>
       </div>
     </div>
