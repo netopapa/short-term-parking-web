@@ -7,6 +7,11 @@ import { Observable } from 'rxjs/Observable';
 import { CrudService } from '../generic-crud/generic-crud.service';
 import { ErrorService } from '../toast-notification-service/error-service/error.service';
 
+interface PeriodSearch {
+  start: Date;
+  end: Date;
+}
+
 @Injectable()
 export class RegistrationService extends CrudService<Registration> {
 
@@ -18,6 +23,11 @@ export class RegistrationService extends CrudService<Registration> {
 
   public findAllInside(): Observable<Registration[]> {
     return this.get(this.baseURL + 'inside');
+  }
+
+  public findBetween(start: Date, end: Date): Observable<Registration[]> {
+    const searchParameters: PeriodSearch  = {start: start, end: end};
+    return this.post(this.baseURL + 'findbetween', searchParameters);
   }
 
 }
