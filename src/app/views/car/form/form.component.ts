@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class FormComponent extends GenericFormComponent<Car, CarService> implements AfterViewInit {
 
+  cars: Car[] = [];
+
   constructor(
     service: CarService,
     router: Router,
@@ -27,6 +29,22 @@ export class FormComponent extends GenericFormComponent<Car, CarService> impleme
     $('#carModal').on('hide.bs.modal', () => {
       this.obj = new Car();
     });
+
+    $('#carModal').on('show.bs.modal', () => {
+      this.getCars();
+    });
+  }
+
+  getCars() {
+    this.service.getAll().subscribe(
+      success => {
+        this.cars = success;
+      }
+    );
+  }
+
+  plateAlreadyExists(): boolean {
+    return this.cars.find(item => item.plate === this.obj.plate && this.obj.id !== item.id) ? true : false;
   }
 
 }

@@ -56,7 +56,7 @@
                 <ng-container matColumnDef="value">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Pago
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let item"> R${{ item.value }} </mat-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.value | currency:'BRL':true }} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="acoes">

@@ -153,7 +153,7 @@ export class RestService {
       if (body instanceof Array && body.length > 0) {
         errMsg = body[0];
       } else {
-        errMsg = body._body;
+        errMsg = body.message;
       }
     } else {
       errMsg = error._body ? error._body : error.toString();

@@ -73,10 +73,6 @@ export class GenericFormComponent<TModel extends BaseModel, TService extends Cru
 
     }
 
-    codeAlreadyExists(mainItem: any, all: any[]): boolean {
-        return all.find(item => item.code === mainItem.code && mainItem.id !== item.id) ? true : false;
-    }
-
     updateOrCreate(idModal?: string) {
         // tslint:disable-next-line:no-shadowed-variable
         const onError = function (error) {
