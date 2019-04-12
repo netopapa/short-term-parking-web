@@ -47,4 +47,8 @@ export class FormComponent extends GenericFormComponent<Car, CarService> impleme
     return this.cars.find(item => item.plate === this.obj.plate && this.obj.id !== item.id) ? true : false;
   }
 
+  setToUpper(): void {
+    this.obj.plate = this.obj.plate.toUpperCase();
+  }
+
 }

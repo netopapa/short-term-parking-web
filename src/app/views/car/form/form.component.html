@@ -30,7 +30,7 @@
 
             <div class="col-sm-6">
               <mat-form-field>
-                <input matInput [(ngModel)]="obj.plate" placeholder="Placa" name="plate" type="text" maxlength="7"
+                <input matInput [(ngModel)]="obj.plate" (keyup)="setToUpper()" placeholder="Placa" name="plate" type="text" maxlength="7"
                   required>
               </mat-form-field>
               <p *ngIf="plateAlreadyExists()" class="alert-text">Já existe um carro com esta placa</p>

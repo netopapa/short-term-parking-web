@@ -61,6 +61,7 @@ export class CheckinFormComponent extends GenericFormComponent<Registration, Reg
   }
 
   setCar(): void {
+    this.obj.car.plate = this.obj.car.plate.toUpperCase();
     if (this.plateAlreadyExists()) {
       Object.assign(this.obj.car, this.cars.find(item => item.plate === this.obj.car.plate));
     } else {
