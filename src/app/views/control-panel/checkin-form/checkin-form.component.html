@@ -17,7 +17,9 @@
 
       <div class="modal-body">
 
-        <form class="form-horizontal" #checkinForm="ngForm">
+        <h3 class="text-center" *ngIf="closed">O Estacionamento está fechado. <br> Avise ao cliente!</h3>
+
+        <form *ngIf="!closed" class="form-horizontal" #checkinForm="ngForm">
 
           <div class="row">
 
@@ -51,7 +53,12 @@
             <div class="btn-space">
               <button class="btn btn-spare btn-round btn-raised pull-right" [disabled]="!checkinForm.form.valid"
                 (click)="updateOrCreate('#checkinModal')">
-                Liberar entrada
+                <ng-container *ngIf="!edit">
+                  Liberar entrada
+                </ng-container>
+                <ng-container *ngIf="edit">
+                  Editar entrada
+                </ng-container>
               </button>
               <button type="button" class="btn btn-round pull-right" (click)="closeModal('#checkinModal')">
                 Voltar

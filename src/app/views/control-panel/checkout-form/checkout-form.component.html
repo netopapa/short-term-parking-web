@@ -57,11 +57,20 @@
             <div class="col-sm-6">
               <div class="info">
                 <label>Preço</label>
-                <h5>{{obj.value | currency:'BRL':true }}</h5>
+                <h5><strong>{{obj.value | currency:'BRL':true }}</strong></h5>
               </div>
             </div>
 
             <div class="btn-space">
+              <button class="btn btn-warning btn-round btn-raised pull-left" [disabled]="!checkoutForm.form.valid"
+                (click)="switchHolyday()">
+                <ng-container *ngIf="isHolyday">
+                  Remover valor de feriado
+                </ng-container>
+                <ng-container *ngIf="!isHolyday">
+                  Aplicar valor de feriado
+                </ng-container>
+              </button>
               <button class="btn btn-spare btn-round btn-raised pull-right" [disabled]="!checkoutForm.form.valid"
                 (click)="updateOrCreate('#checkoutModal')">
                 Liberar veículo

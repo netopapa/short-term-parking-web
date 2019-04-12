@@ -44,19 +44,19 @@
                 <ng-container matColumnDef="checkin">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Entrada
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let item"> {{ item.checkin | date: 'h:mm' }} </mat-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.checkin | date: 'H:mm' }} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="checkout">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Saída
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let item"> {{ item.checkout | date: 'h:mm' }} </mat-cell>
+                  <mat-cell *matCellDef="let item"> {{ item.checkout | date: 'H:mm' }} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="value">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Pago
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let item"> {{ item.value | currency:'BRL':true }} </mat-cell>
+                  <mat-cell *matCellDef="let item"> R${{ item.value }} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="acoes">

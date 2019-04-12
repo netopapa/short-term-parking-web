@@ -53,6 +53,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
+import { ParkingService } from './util/parking.service';
 
 export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, loaderService: LoaderService): Http {
   return new InterceptedHttp(xhrBackend, requestOptions, loaderService);
@@ -127,7 +128,8 @@ export class MaterialModule { }
     LoaderService,
     CarService,
     PeriodService,
-    RegistrationService
+    RegistrationService,
+    ParkingService
   ],
   bootstrap: [AppComponent]
 })
