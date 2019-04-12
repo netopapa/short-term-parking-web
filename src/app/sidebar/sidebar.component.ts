@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 declare const $: any;
 
@@ -52,10 +51,10 @@ export const ROUTES: RouteInfo[] = [
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
     public menuItems: any[];
 
-    constructor(private router: Router) { }
+    constructor() { }
 
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -66,6 +65,15 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+    }
+
+    ngAfterViewInit() {
+        setInterval(() => {
+            $('#img-logo').addClass('anime-rotate');
+            setTimeout(() => {
+                $('#img-logo').removeClass('anime-rotate');
+            }, 3000);
+        }, 15000);
     }
 
     updatePS(): void {

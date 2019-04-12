@@ -162,6 +162,22 @@ mat-header-row * {
     stroke: #4e8e26;
 }
 
+.anime-rotate {
+    animation-name: rotation;
+    animation-duration: 2.5s;
+    animation-delay: 1s;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotateY(0deg);
+    }
+    
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
 @media print {
     body img {
         width: 90%;
