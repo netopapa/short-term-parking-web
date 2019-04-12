@@ -1,1 +1,99 @@
-<p>Dashboard works</p>
+<div class="main-content">
+    <div class="container-fluid">
+
+        <a href="#/reports/period" target="_blanc" class="btn btn-warning">Relatório por período</a>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="spare">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Total de Registros</p>
+                        <h3 class="card-title">{{log.length + insides.length}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="spare">
+                        <i class="material-icons">directions_car</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Total de Veículos</p>
+                        <h3 class="card-title">{{cars.length}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="spare">
+                        <i class="material-icons">timer</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Veículos Estacionados</p>
+                        <h3 class="card-title">{{insides.length}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="spare">
+                        <i class="material-icons">attach_money</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Lucro do dia</p>
+                        <h3 class="card-title">{{dayProfit | currency:'BRL':true}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Tabela de Preços</h3>
+                    </div>
+                    <div class="card-content fixed-table-height">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Segunda à Sexta</th>
+                                    <th scope="col">Sábado & Domingo</th>
+                                    <th scope="col">Feriados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">08h às 12h</th>
+                                    <td>{{ 2 | currency:'BRL':true}}</td>
+                                    <td>{{ 2.5 | currency:'BRL':true}}</td>
+                                    <td>{{ 2.5 | currency:'BRL':true}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">12h às 18h</th>
+                                    <td>{{ 3 | currency:'BRL':true}}</td>
+                                    <td>{{ 2.5 | currency:'BRL':true}}</td>
+                                    <td>{{ 2.5 | currency:'BRL':true}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Preço do dia ({{getDayName()}})</h3>
+                    </div>
+                    <div class="card-content fixed-table-height">
+                        <h1 class="green-text text-center">{{getDayPrice() | currency:'BRL':true}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

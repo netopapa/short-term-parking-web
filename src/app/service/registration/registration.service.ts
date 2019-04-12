@@ -10,6 +10,7 @@ import { ErrorService } from '../toast-notification-service/error-service/error.
 interface PeriodSearch {
   start: Date;
   end: Date;
+  inside: boolean;
 }
 
 @Injectable()
@@ -25,9 +26,13 @@ export class RegistrationService extends CrudService<Registration> {
     return this.get(this.baseURL + 'inside');
   }
 
-  public findBetween(start: Date, end: Date): Observable<Registration[]> {
-    const searchParameters: PeriodSearch  = {start: start, end: end};
+  public findBetween(start: Date, end: Date, inside: boolean): Observable<Registration[]> {
+    const searchParameters: PeriodSearch = { start: start, end: end, inside: inside };
     return this.post(this.baseURL + 'findbetween', searchParameters);
+  }
+
+  public enableExit(data: Registration): Observable<Registration> {
+    return this.put(this.baseURL + 'enableExit', data);
   }
 
 }

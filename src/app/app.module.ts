@@ -33,7 +33,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MAT_DATE_LOCALE
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -54,6 +55,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { ParkingService } from './util/parking.service';
+import { PeriodComponent } from './reports/period/period.component';
 
 export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, loaderService: LoaderService): Http {
   return new InterceptedHttp(xhrBackend, requestOptions, loaderService);
@@ -115,13 +117,15 @@ export class MaterialModule { }
     AppComponent,
     AdminLayoutComponent,
     LoadingComponent,
+    PeriodComponent
   ],
   providers: [
     {
       provide: Http,
       useFactory: httpFactory,
-      deps: [XHRBackend, RequestOptions, LoaderService]
+      deps: [XHRBackend, RequestOptions, LoaderService],
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-br' },
     RestService,
     ToastService,
     ErrorService,

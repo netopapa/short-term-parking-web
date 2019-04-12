@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
+.wrapper {
     background-color: #1b1b1b;
 }
 
@@ -58,6 +57,14 @@ mat-header-row * {
 
 .background {
     background-color: #4e8e26;
+}
+
+.green-text {
+    color: #4e8e26;
+}
+
+.fixed-table-height {
+    height: 162px;
 }
 
 .centralizado {

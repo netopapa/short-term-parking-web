@@ -1,0 +1,52 @@
+body,
+html {
+    background-color: #fff !important;
+}
+
+.options {
+    padding: 10px 20px;
+
+    .btn {
+        transform: translateY(21px);
+    }
+}
+
+.option {
+    display: flex;
+    align-items: baseline;
+}
+
+img {
+    display: block;
+    margin: 20px auto;
+    width: 80px;
+}
+
+
+table {
+
+    th,
+    td {
+        font-size: 15px;
+    }
+
+    thead {
+        tr>th {
+            font-weight: 700;
+        }
+    }
+}
+
+.report-infos {
+    display: none;
+}
+
+@media print {
+    .options {
+        display: none;
+    }
+
+    .report-infos {
+        display: inherit !important;
+    }
+}

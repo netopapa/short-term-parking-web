@@ -3,8 +3,9 @@ import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Registration } from 'app/model/registration.model';
 import { RegistrationService } from 'app/service/registration/registration.service';
-import { GenericFormComponent } from 'app/views/generic/generic-form/generic-form.component';
+import { MessageType } from 'app/service/toast-notification-service/message-type.enum';
 import { ParkingService } from 'app/util/parking.service';
+import { GenericFormComponent } from 'app/views/generic/generic-form/generic-form.component';
 declare var $: any;
 
 @Component({
@@ -40,6 +41,25 @@ export class CheckoutFormComponent extends GenericFormComponent<Registration, Re
   switchHolyday(): void {
     this.isHolyday = !this.isHolyday;
     this.obj.value = this.parkingService.generateValue(this.isHolyday);
+  }
+
+  updateOrCreate(idModal?: string) {
+    const onError = function (error) {
+      this.toast(error.headers.get('error'), MessageType.ERROR);
+    }.bind(this);
+
+    try {
+
+      this.service.enableExit(this.obj).subscribe(
+        success => {
+          this.obj = success;
+          this.toast(this.recordUpdateMsg, MessageType.SUCCESS);
+          this.afterSaveModal(idModal);
+        });
+
+    } catch (error) {
+      onError(error);
+    }
   }
 
 }
