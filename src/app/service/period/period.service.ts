@@ -12,7 +12,7 @@ export class PeriodService extends CrudService<Period> {
   constructor(http: Http,
     public activatedRoute: ActivatedRoute,
     errorHandler?: ErrorService) {
-    super(http, Constant.CAR, errorHandler, activatedRoute);
+    super(http, Constant.PERIOD, errorHandler, activatedRoute);
   }
 
 }

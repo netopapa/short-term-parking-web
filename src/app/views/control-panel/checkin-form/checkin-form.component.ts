@@ -32,7 +32,7 @@ export class CheckinFormComponent extends GenericFormComponent<Registration, Reg
   }
 
   beforeShowModal() {
-    this.hour = this.obj.checkin.toTimeString().slice(0, 5);
+    this.hour = new Date(this.obj.checkin).toTimeString().slice(0, 5);
   }
 
 }
